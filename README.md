@@ -25,8 +25,20 @@ List installed plugins:
 packer plugins installed
 ```
 
+Build the image:
+
+```bash
+packer build ibuntu.pkr.hcl
+```
+
+## Pitfalls
+
+- `http/meta-data` muss vorhanden sein, auch wenn es leer ist
+- Escaping bei der `casper`-Kommandozeile muss genau so stimmen
+
 ## Links
 
 - [Packer Documentation](https://www.packer.io/docs/)
 - [HashiCorp Configuration Language (HCL)](https://www.terraform.io/language/syntax/configuration)
 - [VirtualBox Plugin](https://www.packer.io/plugins/builders/virtualbox/iso)
+- [Ubuntu Automatic Installation](https://ubuntu.com/server/docs/install/autoinstall)
