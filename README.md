@@ -27,15 +27,19 @@ packer plugins installed
 
 ## Building the Image
 
-Define your image as in `ubuntu-server.pkr.hcl` and build it:
+Define your image as in `ubuntu-server.pkr.hcl`, the variables in
+`ubuntu-server-20.04.pkrvars.hcl` or `ubuntu-server-22.04.pkrvars.hcl`,
+respectively, and build it:
 
 ```bash
-packer build ubuntu-server.pkr.hcl
+packer build -var-file ubuntu-server-20.04.pkrvars.hcl ubuntu-server.pkr.hcl
+packer build -var-file ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
 ```
 
 ## Pitfalls
 
 ### Ubuntu
+
 - `http/meta-data` must be available, even though it is just an empty file
 - Make sure that the escaping of the `casper` command is accurate.
 

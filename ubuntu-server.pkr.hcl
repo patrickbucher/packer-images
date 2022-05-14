@@ -7,11 +7,35 @@ packer {
     }
 }
 
+variable "iso_url" {
+    type = string
+    description = "The URL for the Ubuntu ISO image, to be found at https://releases.ubuntu.com/"
+}
+
+variable "iso_checksum" {
+    type = string
+    description = "The checksum of the ISO image (see variable 'isu_url') with a prefix like sha256: or md5:"
+}
+
+variable "disk_size" {
+    type = number 
+    description = "The disk size in megabytes"
+}
+
+variable "memory" {
+    type = number
+    description = "The memory size in megabytes"
+}
+
+variable "output" {
+    type = string
+    description = "A name to be used for the output in the ./images/ folder"
+}
+
 source "virtualbox-iso" "ubuntu" {
     boot_wait = "5s"
     boot_command = [
         "c",
-        "<wait5s>",
         "linux /casper/vmlinuz \"ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" autoinstall ---",
         "<enter>",
         "initrd /casper/initrd",
@@ -20,20 +44,21 @@ source "virtualbox-iso" "ubuntu" {
         "<enter>",
     ]
     guest_os_type = "Ubuntu_64"
-    iso_url = "https://releases.ubuntu.com/jammy/ubuntu-22.04-live-server-amd64.iso"
-    iso_checksum = "sha256:84aeaf7823c8c61baa0ae862d0a06b03409394800000b3235854a6b38eb4856f"
+    iso_url = var.iso_url
+    iso_checksum = var.iso_checksum
     iso_interface = "sata"
     http_directory = "http-ubuntu-server"
-    disk_size = "25000"
-    memory = 4096
+    disk_size = "${var.disk_size}"
+    memory = var.memory
     ssh_username = "packer"
     ssh_password = "packer"
+    ssh_timeout = "15m"
     shutdown_command = "echo -n 'packer' | sudo -S poweroff"
     headless = false
     vboxmanage = [
         ["modifyvm", "{{.Name}}", "--firmware", "EFI"]
     ]
-    output_directory = "./images"
+    output_directory = "./images/${var.output}"
 }
 
 build {
