@@ -17,6 +17,11 @@ variable "iso_checksum" {
     description = "The checksum of the ISO image (see variable 'isu_url') with a prefix like sha256: or md5:"
 }
 
+variable "cpus" {
+    type = number
+    description = "The number of CPU cores"
+}
+
 variable "disk_size" {
     type = number 
     description = "The disk size in megabytes"
@@ -27,9 +32,9 @@ variable "memory" {
     description = "The memory size in megabytes"
 }
 
-variable "output" {
+variable "codename" {
     type = string
-    description = "A name to be used for the output in the ./images/ folder"
+    description = "A name suffix to be used for the output in the ./images/ folder"
 }
 
 source "virtualbox-iso" "ubuntu" {
@@ -48,6 +53,7 @@ source "virtualbox-iso" "ubuntu" {
     iso_checksum = var.iso_checksum
     iso_interface = "sata"
     http_directory = "http-ubuntu-server"
+    cpus = var.cpus
     disk_size = "${var.disk_size}"
     memory = var.memory
     ssh_username = "packer"
@@ -58,7 +64,8 @@ source "virtualbox-iso" "ubuntu" {
     vboxmanage = [
         ["modifyvm", "{{.Name}}", "--firmware", "EFI"]
     ]
-    output_directory = "./images/${var.output}"
+    output_directory = "./images/ubuntu-server-${var.codename}"
+    keep_registered = true
 }
 
 build {
