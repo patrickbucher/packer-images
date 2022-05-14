@@ -28,12 +28,19 @@ packer plugins installed
 ## Building the Image
 
 Define your image as in `ubuntu-server.pkr.hcl`, the variables in
-`ubuntu-server-20.04.pkrvars.hcl` or `ubuntu-server-22.04.pkrvars.hcl`,
-respectively, and build it:
+`vars/ubuntu-server-20.04.pkrvars.hcl` or
+`vars/ubuntu-server-22.04.pkrvars.hcl`, respectively, and build it:
 
 ```bash
-packer build -var-file ubuntu-server-20.04.pkrvars.hcl ubuntu-server.pkr.hcl
-packer build -var-file ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
+packer build -var-file vars/ubuntu-server-20.04.pkrvars.hcl ubuntu-server.pkr.hcl
+packer build -var-file vars/ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
+```
+
+Same for the desktop:
+
+```bash
+packer build -var-file vars/ubuntu-desktop-20.04.pkrvars.hcl ubuntu-desktop.pkr.hcl
+packer build -var-file vars/ubuntu-desktop-22.04.pkrvars.hcl ubuntu-desktop.pkr.hcl
 ```
 
 ## Pitfalls
@@ -42,6 +49,9 @@ packer build -var-file ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
 
 - `http/meta-data` must be available, even though it is just an empty file
 - Make sure that the escaping of the `casper` command is accurate.
+- Use the server images for the desktop installation, too; the desktop image
+  only provides a graphical installer from a live GUI environment, which is bad
+  for automation.
 
 ## Links
 
@@ -52,4 +62,5 @@ packer build -var-file ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
 
 ## TODO
 
+- provide variable `additional_packages` that is used in a `apt install -y ${var.additional_packages}` build step
 - get rid of floppy
