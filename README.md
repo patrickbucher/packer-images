@@ -49,3 +49,7 @@ packer build -var-file ubuntu-server-22.04.pkrvars.hcl ubuntu-server.pkr.hcl
 - [HashiCorp Configuration Language (HCL)](https://www.terraform.io/language/syntax/configuration)
 - [VirtualBox Plugin](https://www.packer.io/plugins/builders/virtualbox/iso)
 - [Ubuntu Automatic Installation](https://ubuntu.com/server/docs/install/autoinstall)
+
+## TODO
+
+- get rid of floppy

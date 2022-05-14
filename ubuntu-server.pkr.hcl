@@ -63,4 +63,8 @@ source "virtualbox-iso" "ubuntu" {
 
 build {
     sources = ["sources.virtualbox-iso.ubuntu"]
+    provisioner "shell" {
+        execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        script = "./scripts/ubuntu-install-nginx.sh"
+    }
 }
