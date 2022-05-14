@@ -4,7 +4,7 @@ autoinstall:
   identity:
     hostname: "packer"
     username: "packer"
-    # the password is "packer"; use hashpw.py (on Unix-like system) to generate a hash from anothre password
+    # the password is "packer"; use hashpw.py (on Unix-like system) to generate a hash from another password
     password: "$6$fG5O5qYkjiJMhFZB$N5tc9VRq0AUfsfn/Eb3tOZtD04Mxk7sqvbbbtPsiDVvcD61dXAhychGd0JOeOjuqekngxgDpgmYdB.a6yqcfM1"
   early-commands:
     # do not exceed connection attempts upon installation

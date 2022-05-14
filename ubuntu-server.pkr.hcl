@@ -23,12 +23,12 @@ source "virtualbox-iso" "ubuntu" {
     iso_url = "https://releases.ubuntu.com/jammy/ubuntu-22.04-live-server-amd64.iso"
     iso_checksum = "sha256:84aeaf7823c8c61baa0ae862d0a06b03409394800000b3235854a6b38eb4856f"
     iso_interface = "sata"
-    http_directory = "http"
+    http_directory = "http-ubuntu-server"
     disk_size = "25000"
     memory = 4096
     ssh_username = "packer"
     ssh_password = "packer"
-    shutdown_command = "sudo poweroff"
+    shutdown_command = "echo -n 'packer' | sudo -S poweroff"
     headless = false
     vboxmanage = [
         ["modifyvm", "{{.Name}}", "--firmware", "EFI"]

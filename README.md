@@ -1,6 +1,6 @@
 # Packer
 
-Create a file `ubuntu.pkr.hcl` (check [github.com/hashicorp/virtualbox](https://github.com/hashicorp/virtualbox) for recent version, or use version indication such as `">= 1.0.0"`):
+Create a file `ubuntu-server.pkr.hcl` (check [github.com/hashicorp/virtualbox](https://github.com/hashicorp/virtualbox) for recent version, or use version indication such as `">= 1.0.0"`):
 
 ```hcl
 packer {
@@ -25,16 +25,19 @@ List installed plugins:
 packer plugins installed
 ```
 
-Build the image:
+## Building the Image
+
+Define your image as in `ubuntu-server.pkr.hcl` and build it:
 
 ```bash
-packer build ibuntu.pkr.hcl
+packer build ubuntu-server.pkr.hcl
 ```
 
 ## Pitfalls
 
-- `http/meta-data` muss vorhanden sein, auch wenn es leer ist
-- Escaping bei der `casper`-Kommandozeile muss genau so stimmen
+### Ubuntu
+- `http/meta-data` must be available, even though it is just an empty file
+- Make sure that the escaping of the `casper` command is accurate.
 
 ## Links
 
