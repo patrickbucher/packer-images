@@ -43,6 +43,12 @@ packer build -var-file vars/ubuntu-desktop-20.04.pkrvars.hcl ubuntu-desktop.pkr.
 packer build -var-file vars/ubuntu-desktop-22.04.pkrvars.hcl ubuntu-desktop.pkr.hcl
 ```
 
+Or for OpenBSD:
+
+```bash
+packer build -var-file vars/openbsd71.pkrvars.hcl openbsd.pkr.hcl
+```
+
 ## Pitfalls
 
 ### Ubuntu
