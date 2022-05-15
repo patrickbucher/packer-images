@@ -43,9 +43,10 @@ packer build -var-file vars/ubuntu-desktop-20.04.pkrvars.hcl ubuntu-desktop.pkr.
 packer build -var-file vars/ubuntu-desktop-22.04.pkrvars.hcl ubuntu-desktop.pkr.hcl
 ```
 
-Or for OpenBSD:
+Or for OpenBSD (7.0 or 7.1):
 
 ```bash
+packer build -var-file vars/openbsd70.pkrvars.hcl openbsd.pkr.hcl
 packer build -var-file vars/openbsd71.pkrvars.hcl openbsd.pkr.hcl
 ```
 
@@ -58,6 +59,10 @@ packer build -var-file vars/openbsd71.pkrvars.hcl openbsd.pkr.hcl
 - Use the server images for the desktop installation, too; the desktop image
   only provides a graphical installer from a live GUI environment, which is bad
   for automation.
+
+### OpenBSD
+
+- The line endings in `http-openbsd/install.conf` must be CR, not CRLF!
 
 ## Links
 
