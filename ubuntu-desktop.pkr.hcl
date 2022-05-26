@@ -70,6 +70,14 @@ source "virtualbox-iso" "ubuntu" {
     keep_registered = true
 }
 
+local "packages" {
+    expression = join(" ", var.additional_packages)
+}
+
 build {
     sources = ["sources.virtualbox-iso.ubuntu"]
+    provisioner "shell" {
+        execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        inline = ["apt update -y", "apt install -y ${local.packages}"]
+    }
 }

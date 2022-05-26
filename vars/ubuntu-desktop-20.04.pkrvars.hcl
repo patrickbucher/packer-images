@@ -5,3 +5,4 @@ cpus = 2
 disk_size = 25000
 memory = 4096
 codename = "focal"
+additional_packages = []

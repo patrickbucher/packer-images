@@ -4,3 +4,4 @@ cpus = 1
 disk_size = 25000
 memory = 4096
 codename = "jammy"
+additional_packages = []

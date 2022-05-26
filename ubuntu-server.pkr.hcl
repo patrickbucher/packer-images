@@ -37,6 +37,12 @@ variable "codename" {
     description = "A name suffix to be used for the output in the ./images/ folder"
 }
 
+variable "additional_packages" {
+    type = list(string)
+    description = "A list of additional packages to be installed"
+    default = []
+}
+
 source "virtualbox-iso" "ubuntu" {
     boot_wait = "5s"
     boot_command = [
@@ -68,10 +74,18 @@ source "virtualbox-iso" "ubuntu" {
     keep_registered = true
 }
 
+local "packages" {
+    expression = join(" ", var.additional_packages)
+}
+
 build {
     sources = ["sources.virtualbox-iso.ubuntu"]
     provisioner "shell" {
         execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         script = "./scripts/ubuntu-install-nginx.sh"
+    }
+    provisioner "shell" {
+        execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        inline = ["apt update -y", "apt install -y ${local.packages}"]
     }
 }
