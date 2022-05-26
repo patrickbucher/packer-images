@@ -88,4 +88,12 @@ build {
         execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         inline = ["apt update -y", "apt install -y ${local.packages}"]
     }
+    provisioner "shell" {
+        execute_command = "echo -n 'packer' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        scripts = [
+            "./scripts/ubuntu-upgrade.sh",
+            "./scripts/ubuntu-add-vmadmin.sh",
+            "./scripts/ubuntu-install-nginx.sh",
+        ]
+    }
 }
