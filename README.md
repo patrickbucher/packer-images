@@ -75,3 +75,20 @@ packer build -var-file vars/openbsd71.pkrvars.hcl openbsd.pkr.hcl
 
 - provide variable `additional_packages` that is used in a `apt install -y ${var.additional_packages}` build step
 - get rid of floppy
+
+# Why Packer?
+
+Packer allows you to define your base images as code, which is a part of the
+greater _Infrastructure as Code_ idea. But why building infrastructure as code?
+
+- _Reusability_: Code allows you to build many instances of the same thing --
+  identical or with parametrized variations of it.
+- _Consistency_: Code allows you to build everything the same way every time.
+  The outcome becomes predictable.
+- _Transparency_: Code allows you to understand how something is built; it can
+  be reviewed, commented, audited, and improved.
+- _Reproducibility_: Code allows you to build things at a whim; the only
+  decision is whether or not you want to build the thing; not how to do so.
+- _Disposability_: Code allows you to discard of broken things, because it is
+  easy and safe to replace everything by re-building it.
+
